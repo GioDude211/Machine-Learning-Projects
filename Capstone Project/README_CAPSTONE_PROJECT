@@ -1,0 +1,38 @@
+D&D Command Intent Classifier (NLP Narrative Model)
+Tagline: An NLP model using a Recurrent Neural Network (RNN/LSTM) in PyTorch to interpret and classify spoken Dungeons & Dragons commands into game-specific intents with high accuracy.
+
+This project, part of a Machine Learning Capstone, focuses on developing a Natural Language Processing (NLP) component to understand and categorize Dungeons & Dragons (D&D) game commands. It employs a supervised learning approach with an RNN (specifically an LSTM architecture) built using PyTorch. The model is trained to classify text-based commands (derived from spoken input) into one of several predefined D&D player intents (e.g., "attack," "move," "cast spell").
+
+The primary objective was to achieve high accuracy (targeting at least 80%) in correctly identifying D&D player intents from varied command phrasing, demonstrating the capability of NLP models in understanding domain-specific language.
+
+Key Features & Highlights
+Intent Classification: Classifies D&D commands into 7 core intents: attack, move, jump, hide, talk, cast, and filler.
+RNN/LSTM Model: Utilizes a multi-layer LSTM network for sequence processing and intent prediction.
+Data Synthesis: Combines manually crafted D&D commands with processed data from the Cornell Movie-Dialogs Corpus and D&D Critical Role Transcripts to create a diverse training set.
+Text Preprocessing Pipeline:
+Initial concept for speech-to-text transformation (though speech input itself is outside the notebook's direct scope).
+Text normalization and cleaning.
+Tokenization using spaCy.
+Vocabulary creation and sequence encoding.
+High Performance: Achieved 98.33% accuracy on the test set.
+GPU Accelerated: Training and evaluation leveraging CUDA-enabled GPU for efficiency.
+Model Architecture
+The core of this project is a BasicLSTM model built in PyTorch, consisting of:
+
+An Embedding Layer: Maps input tokens (words) from the vocabulary (size: ~56,410) to dense vectors (embedding dimension: 100).
+An LSTM Layer: Processes the embedded sequences with 4 stacked LSTM layers and a hidden dimension of 128. batch_first=True is used.
+A Linear Layer (Fully Connected): Maps the final hidden state of the LSTM to the output dimension (7 classes representing D&D intents).
+Dataset
+The training data was aggregated and processed from multiple sources:
+
+Manually Created D&D Commands: A focused set of example commands for each defined intent (e.g., "attack the goblin with my sword!", "move north").
+Cornell Movie-Dialogs Corpus: A large corpus of general conversational text. Utterances were selectively labeled with D&D intents based on keyword spotting (e.g., if "attack" is in the movie line, label it as "attack").
+D&D Critical Role Transcripts: Transcripts from actual D&D play sessions (cr_dnd_transcripts_1.txt). Similar keyword-based labeling was applied to extract relevant command-like phrases and intents.
+Preprocessing: All text data was converted to lowercase, tokenized using spaCy, and then encoded into numerical sequences based on a project-specific vocabulary. Sequences were padded to a fixed length (30) for batch processing.
+Technologies Used
+Language: Python 3.x
+Core ML/DL Libraries: PyTorch (for LSTM model, DataLoader, Dataset), Scikit-learn (for train_test_split).
+Note: TensorFlow/Keras were imported in the notebook but the primary model (BasicLSTM) and training loop appear to be PyTorch-centric.
+NLP & Data Handling: spaCy (for tokenization), Convokit (for Cornell Movie Corpus), Pandas/NumPy (implicitly through other libraries or for general data tasks).
+Visualization: Matplotlib.
+Environment: Jupyter Notebook, CUDA-enabled GPU (NVIDIA GeForce GTX 1660 SUPER mentioned).
